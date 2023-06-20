@@ -1,0 +1,132 @@
+use testdb
+switched to db testdb
+db.testcollection.insertOne({name:"kiruba",age:25});
+{
+  acknowledged: true,
+  insertedId: ObjectId("64916dd14887c2c6e1932393")
+}
+db.testcollection.find();
+{
+  _id: ObjectId("64916dd14887c2c6e1932393"),
+  name: 'kiruba',
+  age: 25
+}
+db.testcollection.insertMany([{name:"kavin",id:1},{name:"madhu",id:2},{name:"kous",id:3}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6491701c4887c2c6e1932394"),
+    '1': ObjectId("6491701c4887c2c6e1932395"),
+    '2': ObjectId("6491701c4887c2c6e1932396")
+  }
+}
+db.testcollection.find();
+{
+  _id: ObjectId("64916dd14887c2c6e1932393"),
+  name: 'kiruba',
+  age: 25
+}
+{
+  _id: ObjectId("6491701c4887c2c6e1932394"),
+  name: 'kavin',
+  id: 1
+}
+{
+  _id: ObjectId("6491701c4887c2c6e1932395"),
+  name: 'madhu',
+  id: 2
+}
+{
+  _id: ObjectId("6491701c4887c2c6e1932396"),
+  name: 'kous',
+  id: 3
+}
+
+db.testcollection.find({name:"kiruba"});
+{
+  _id: ObjectId("64916dd14887c2c6e1932393"),
+  name: 'kiruba',
+  age: 25
+}
+db.testcollection.find({id:2})
+{
+  _id: ObjectId("6491701c4887c2c6e1932395"),
+  name: 'madhu',
+  id: 2
+}
+db.testcollection.updateOne({name:"kiruba"},{$set:{id:0}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.testcollection.find();
+{
+  _id: ObjectId("64916dd14887c2c6e1932393"),
+  name: 'kiruba',
+  age: 25,
+  id: 0
+}
+{
+  _id: ObjectId("6491701c4887c2c6e1932394"),
+  name: 'kavin',
+  id: 1
+}
+{
+  _id: ObjectId("6491701c4887c2c6e1932395"),
+  name: 'madhu',
+  id: 2
+}
+{
+  _id: ObjectId("6491701c4887c2c6e1932396"),
+  name: 'kous',
+  id: 3
+}
+db.testcollection.updateOne({name:"kavin"},{$set:{id:1}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+db.testcollection.updateOne({name:"madhu"},{$set:{id:3}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.testcollection.updateOne({name:"kous"},{$set:{id:4}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.testcollection.find();
+{
+  _id: ObjectId("64916dd14887c2c6e1932393"),
+  name: 'kiruba',
+  age: 25,
+  id: 1
+}
+{
+  _id: ObjectId("6491701c4887c2c6e1932394"),
+  name: 'kavin',
+  id: 1
+}
+{
+  _id: ObjectId("6491701c4887c2c6e1932395"),
+  name: 'madhu',
+  id: 3
+}
+{
+  _id: ObjectId("6491701c4887c2c6e1932396"),
+  name: 'kous',
+  id: 4
+}
